@@ -1,3 +1,4 @@
+
 package algebra.spring_boot.auth;
 
 import algebra.spring_boot.security.JwtService;

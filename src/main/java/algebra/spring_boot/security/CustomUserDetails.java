@@ -2,6 +2,7 @@ package algebra.spring_boot.security;
 
 import algebra.spring_boot.user.User;
 import org.springframework.security.core.GrantedAuthority;
+
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;

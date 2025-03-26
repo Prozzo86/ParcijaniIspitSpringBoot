@@ -1,3 +1,4 @@
+
 package algebra.spring_boot.user;
 
 import jakarta.persistence.*;
