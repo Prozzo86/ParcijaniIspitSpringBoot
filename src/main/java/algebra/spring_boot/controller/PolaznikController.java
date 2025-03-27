@@ -1,16 +1,20 @@
 package algebra.spring_boot.controller;
 
 import algebra.spring_boot.dto.CreatePolaznikDto;
+import algebra.spring_boot.dto.UpdatePolaznikDto;
 import algebra.spring_boot.model.Polaznik;
 import algebra.spring_boot.service.PolaznikService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/polaznici")
+@RequestMapping("/polaznici")
 public class PolaznikController {
 
     private final PolaznikService polaznikService;
@@ -21,7 +25,14 @@ public class PolaznikController {
 
     @GetMapping
     public ResponseEntity<List<Polaznik>> fetchAll() {
-        List<Polaznik> polaznici = polaznikService.findAll();
+        List<Polaznik> polaznici = polaznikService.fetchAll();
+        List<String> polaznikNamesFromForLoop = new ArrayList<>();
+        for (Polaznik polaznik : polaznici) {
+            polaznikNamesFromForLoop.add(polaznik.getIme());
+        }
+        List<String> polaznikNames = polaznici.stream()
+                .map(Polaznik::getIme)
+                .toList();
         return ResponseEntity.status(200).body(polaznici);
     }
 
@@ -36,6 +47,12 @@ public class PolaznikController {
     public ResponseEntity<Polaznik> create(@Valid @RequestBody CreatePolaznikDto dto) {
         Polaznik polaznik = polaznikService.create(dto);
         return ResponseEntity.status(201).body(polaznik);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Polaznik> update(@PathVariable Long id, @Valid @RequestBody UpdatePolaznikDto dto) {
+        Polaznik polaznik = polaznikService.update(id, dto);
+        return ResponseEntity.status(200).body(polaznik);
     }
 
     @DeleteMapping("/{id}")

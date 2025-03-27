@@ -19,7 +19,7 @@ public class UpisRowMapper implements RowMapper<Upis> {
         polaznik.setPrezime(rs.getString("prezime"));
 
         ProgramObrazovanja program = new ProgramObrazovanja();
-        program.setProgramObrazovanjaID(rs.getLong("programObrazovanjaID"));
+        program.setId(rs.getLong("programObrazovanjaID"));
         program.setNaziv(rs.getString("naziv"));
         program.setCsvET(rs.getString("csvET"));
 
