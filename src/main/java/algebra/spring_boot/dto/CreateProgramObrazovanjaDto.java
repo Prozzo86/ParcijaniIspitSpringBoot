@@ -1,13 +1,20 @@
 package algebra.spring_boot.dto;
 
 
+import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CreateProgramObrazovanjaDto {
+
+    private Long programObrazovanjaID;
 
     @NotBlank(message = "Naziv programa ne smije biti prazan")
     @Size(min = 3, max = 100, message = "Naziv programa mora imati između 3 i 100 znakova")

@@ -2,6 +2,7 @@ package algebra.spring_boot.service;
 
 
 import algebra.spring_boot.dto.CreateUpisDto;
+import algebra.spring_boot.dto.UpdateUpisDto;
 import algebra.spring_boot.model.Polaznik;
 import algebra.spring_boot.model.ProgramObrazovanja;
 import algebra.spring_boot.model.Upis;
@@ -58,4 +59,25 @@ public class UpisServiceImpl implements UpisService {
     public void delete(Long id) {
         upisRepository.deleteById(id);
     }
+
+    @Override
+    public Upis update(Long id, UpdateUpisDto dto) {
+        Upis upis = upisRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Upis s ID-em " + id + " nije pronađen"));
+
+        if (dto.getPolaznikID() != null) {
+            Polaznik polaznik = polaznikRepository.findById(dto.getPolaznikID())
+                    .orElseThrow(() -> new RuntimeException("Polaznik nije pronađen"));
+            upis.setPolaznik(polaznik);
+        }
+
+        if (dto.getProgramObrazovanjaID() != null) {
+            ProgramObrazovanja program = programRepository.findById(dto.getProgramObrazovanjaID())
+                    .orElseThrow(() -> new RuntimeException("Program obrazovanja nije pronađen"));
+            upis.setProgramObrazovanja(program);
+        }
+
+        return upisRepository.save(upis);
+    }
+
 }

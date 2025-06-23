@@ -1,11 +1,16 @@
 package algebra.spring_boot.dto;
 
+import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UpdateProgramObrazovanjaDto {
 
     private Long programObrazovanjaID;

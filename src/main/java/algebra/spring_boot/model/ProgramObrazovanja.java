@@ -4,14 +4,18 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProgramObrazovanja {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long programObrazovanjaID;
+    private Long id;
 
     @NotBlank(message = "Naziv programa ne smije biti prazan")
     @Size(min = 3, max = 100, message = "Naziv programa mora imati između 3 i 100 znakova")
@@ -22,4 +26,8 @@ public class ProgramObrazovanja {
     @Size(min = 1, max = 10, message = "CSVET mora imati između 1 i 10 znakova")
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "CSVET može sadržavati samo slova i brojeve")
     private String csvET;
+
+    @ManyToOne
+    @JoinColumn(name = "program_obrazovanja_id")
+    private ProgramObrazovanja programObrazovanja;
 }

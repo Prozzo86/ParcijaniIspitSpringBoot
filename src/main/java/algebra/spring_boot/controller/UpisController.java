@@ -1,6 +1,9 @@
 package algebra.spring_boot.controller;
 
 import algebra.spring_boot.dto.CreateUpisDto;
+import algebra.spring_boot.dto.UpdateProgramObrazovanjaDto;
+import algebra.spring_boot.dto.UpdateUpisDto;
+import algebra.spring_boot.model.ProgramObrazovanja;
 import algebra.spring_boot.model.Upis;
 import algebra.spring_boot.service.UpisService;
 import jakarta.validation.Valid;
@@ -30,6 +33,12 @@ public class UpisController {
         Optional<Upis> upis = upisService.findById(id);
         return upis.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(404).build());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Upis> update(@PathVariable Long id, @Valid @RequestBody UpdateUpisDto dto) {
+        Upis upis = upisService.update(id, dto);
+        return ResponseEntity.status(200).body(upis);
     }
 
     @PostMapping

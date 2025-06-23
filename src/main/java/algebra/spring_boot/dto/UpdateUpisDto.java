@@ -1,9 +1,14 @@
 package algebra.spring_boot.dto;
 
+import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UpdateUpisDto {
 
     private Long upisID;
